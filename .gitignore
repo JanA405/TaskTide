@@ -17,6 +17,11 @@ build/
 */build/
 dist/
 */dist/
+bin/
+*/bin/
+data/
+*/data/
+*.mv.db
 
 # IDE & Editor files
 .idea/
