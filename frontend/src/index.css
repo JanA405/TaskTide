@@ -1151,3 +1151,540 @@ tbody tr:last-child td {
 .w-full { width: 100%; }
 .text-muted { color: var(--text-muted); }
 .text-sm { font-size: 0.85rem; }
+
+/* Status & Priority Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: capitalize;
+}
+
+.badge-todo {
+  background: #f1f5f9;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.badge-inprogress {
+  background: #f0f9ff;
+  color: #0284c7;
+  border: 1px solid #bae6fd;
+}
+
+.badge-submitted {
+  background: #fefce8;
+  color: #b45309;
+  border: 1px solid #fef08a;
+}
+
+.badge-approved {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-rejected {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+}
+
+.badge-done {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+.badge-low {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.badge-medium {
+  background: #fffbeb;
+  color: #d97706;
+  border: 1px solid #fde68a;
+}
+
+.badge-high {
+  background: #fff1f2;
+  color: #e11d48;
+  border: 1px solid #fecdd3;
+}
+
+.badge-admin {
+  background: #faf5ff;
+  color: #9333ea;
+  border: 1px solid #e9d5ff;
+}
+
+.badge-manager {
+  background: #eef2ff;
+  color: #4f46e5;
+  border: 1px solid #c7d2fe;
+}
+
+.badge-member {
+  background: #f0fdf4;
+  color: #16a34a;
+  border: 1px solid #bbf7d0;
+}
+
+/* Progress bar */
+.progress-bar-container {
+  width: 100%;
+  height: 7px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Document & Submission Box */
+.submission-banner {
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+
+.rejection-banner {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+
+.approval-banner {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  margin-top: 14px;
+}
+
+.file-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.file-pill:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+/* File Upload Drop Area */
+.file-dropzone {
+  border: 2px dashed #cbd5e1;
+  border-radius: var(--radius-lg);
+  padding: 28px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #f8fafc;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.file-dropzone:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--primary-glow);
+}
+
+.file-dropzone.active {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+}
+
+/* ==========================================================================
+   ENHANCED MODERN UI: HERO BANNERS, PICTURES & RICH FORMS
+   ========================================================================== */
+
+/* Page Hero Banner Card with Integrated Artwork */
+.hero-welcome-card {
+  position: relative;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0c4a6e 100%);
+  border-radius: var(--radius-xl);
+  padding: 32px 36px;
+  color: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.hero-welcome-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle at 75% 30%, rgba(2, 132, 199, 0.22) 0%, transparent 55%),
+              radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.18) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+.hero-welcome-content {
+  position: relative;
+  z-index: 2;
+  max-width: 620px;
+}
+
+.hero-welcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e0f2fe;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  margin-bottom: 14px;
+}
+
+.hero-welcome-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.hero-welcome-desc {
+  font-size: 0.96rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.hero-welcome-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hero-welcome-artwork-wrapper {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  width: 320px;
+  height: 190px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.15);
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .hero-welcome-artwork-wrapper {
+    display: block;
+  }
+}
+
+.hero-welcome-artwork {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.hero-welcome-card:hover .hero-welcome-artwork {
+  transform: scale(1.04);
+}
+
+/* Demo Credentials Quick-Fill Bar (For effortless testing) */
+.demo-accounts-bar {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 20px;
+}
+
+.demo-accounts-title {
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.demo-chips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 8px;
+}
+
+.demo-chip-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.demo-chip-btn:hover {
+  border-color: var(--primary);
+  background: var(--primary-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.demo-chip-role {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.demo-chip-user {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+/* Team Card Modern Picture Cover */
+.team-card-cover {
+  height: 90px;
+  width: 100%;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-card-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.85);
+  transition: transform 0.4s ease;
+}
+
+.team-card:hover .team-card-cover-img {
+  transform: scale(1.06);
+}
+
+.team-card-cover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+
+/* Deliverable Media Preview in Submission Queue */
+.deliverable-preview-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 14px;
+  margin-top: 10px;
+}
+
+.deliverable-thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #cbd5e1;
+}
+
+/* Enhanced Form Inputs with Glow */
+.form-control:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--primary-glow) !important;
+  outline: none;
+}
+
+.input-with-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-with-icon svg {
+  position: absolute;
+  left: 14px;
+  color: var(--text-dim);
+  pointer-events: none;
+}
+
+.input-with-icon input,
+.input-with-icon select {
+  padding-left: 42px !important;
+}
+
+/* Interactive Range Slider with Live Tooltip */
+.progress-slider-wrapper {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 14px 0;
+}
+
+.progress-slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.progress-slider-input {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 9999px;
+  background: #e2e8f0;
+  outline: none;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.progress-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.4);
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.progress-slider-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  background: var(--primary-hover);
+}
+
+/* Empty State Modern Visual Card */
+.empty-state-visual-card {
+  text-align: center;
+  padding: 48px 24px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-state-img {
+  width: 220px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* Priority Selector Radio Chips in Forms */
+.priority-chips-group {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.priority-chip-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-body);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.priority-chip-option:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.priority-chip-option.selected-low {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+  color: #334155;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.2);
+}
+
+.priority-chip-option.selected-medium {
+  border-color: #f59e0b;
+  background: #fffbeb;
+  color: #b45309;
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
+}
+
+.priority-chip-option.selected-high {
+  border-color: #ef4444;
+  background: #fef2f2;
+  color: #b91c1c;
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+.priority-chip-option.selected-urgent {
+  border-color: #dc2626;
+  background: #b91c1c;
+  color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.3);
+}
+

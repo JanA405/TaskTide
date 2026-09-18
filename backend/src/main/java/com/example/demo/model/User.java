@@ -1,6 +1,10 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -14,6 +18,7 @@ public class User {
     private String username;
 
     @Column(nullable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -25,6 +30,10 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "members")
+    private Set<Team> teams = new HashSet<>();
 
     public User() {
     }
@@ -84,5 +93,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Team> teams) {
+        this.teams = teams;
     }
 }

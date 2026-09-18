@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login, reset } from '../store/authSlice';
 import useAuth from '../hooks/useAuth';
-import authHero from '../assets/auth_hero.jpg';
+import teamHero from '../assets/team_collaboration.jpg';
 
 function Login() {
   const navigate = useNavigate();
@@ -24,6 +24,11 @@ function Login() {
     const stored = JSON.parse(localStorage.getItem('user') || 'null');
     if (stored?.token) navigate('/');
   }, [navigate]);
+
+  const fillDemoAccount = (username, password) => {
+    setForm({ username, password });
+    setErrors({});
+  };
 
   const validate = () => {
     const e = {};
@@ -59,27 +64,28 @@ function Login() {
 
         <div style={{ textAlign: 'center', margin: 'auto 0' }}>
           <img
-            src={authHero}
-            alt="TaskTide Workspace Illustration"
+            src={teamHero}
+            alt="TaskTide Team Collaboration"
             className="auth-showcase-artwork"
+            style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 12px 28px rgba(0,0,0,0.18)' }}
           />
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, marginTop: 24, letterSpacing: '-0.02em' }}>
-            Elevate Your Team's Productivity
+            Collaborate, Track & Deliver Together
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: 440, margin: '8px auto 0' }}>
-            Plan sprints, track task pipelines, and collaborate with velocity in one unified modern workspace.
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: 460, margin: '8px auto 0' }}>
+            Empower agile squads with team-assigned tasks, real-time progress tracking, document deliverables, and seamless manager review loops.
           </p>
         </div>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <span className="topbar-badge" style={{ background: 'rgba(2, 132, 199, 0.08)', color: '#0284c7', borderColor: '#bae6fd', fontWeight: 600 }}>
-            ⚡ Fast Agile Sprints
+            👥 Agile Team Squads
           </span>
           <span className="topbar-badge" style={{ background: 'rgba(79, 70, 229, 0.08)', color: '#4f46e5', borderColor: '#c7d2fe', fontWeight: 600 }}>
-            🌊 Interactive Kanban
+            📁 Deliverable Submissions
           </span>
           <span className="topbar-badge" style={{ background: 'rgba(22, 163, 74, 0.08)', color: '#16a34a', borderColor: '#bbf7d0', fontWeight: 600 }}>
-            🔒 Role-based Security
+            🛡️ 3-Tier Governance
           </span>
         </div>
       </div>
@@ -89,7 +95,57 @@ function Login() {
         <div className="auth-box">
           <div className="auth-box-header">
             <h1>Welcome Back</h1>
-            <p>Enter your credentials to access your TaskTide account</p>
+            <p>Sign in with your credentials or select a pre-configured demo account below</p>
+          </div>
+
+          {/* 1-Click Quick Fill Demo Accounts */}
+          <div className="demo-accounts-bar">
+            <div className="demo-accounts-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+              <span>Instant 1-Click Demo Accounts</span>
+            </div>
+            <div className="demo-chips-grid">
+              <button
+                type="button"
+                className="demo-chip-btn"
+                onClick={() => fillDemoAccount('admin', 'admin123')}
+                title="Log in as System Administrator"
+              >
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#9333ea' }} />
+                <div>
+                  <div className="demo-chip-role">Admin</div>
+                  <div className="demo-chip-user">admin</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                className="demo-chip-btn"
+                onClick={() => fillDemoAccount('janz', 'manager123')}
+                title="Log in as Project Manager"
+              >
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#4f46e5' }} />
+                <div>
+                  <div className="demo-chip-role">Manager</div>
+                  <div className="demo-chip-user">janz</div>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                className="demo-chip-btn"
+                onClick={() => fillDemoAccount('dev_alex', 'alex123')}
+                title="Log in as Team Member"
+              >
+                <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#16a34a' }} />
+                <div>
+                  <div className="demo-chip-role">Member</div>
+                  <div className="demo-chip-user">dev_alex</div>
+                </div>
+              </button>
+            </div>
           </div>
 
           {isError && (

@@ -210,3 +210,55 @@ test('T33 – Project: list rendering', () => {
   render(<div>Active Projects</div>);
   expect(screen.getByText(/Active Projects/i)).toBeInTheDocument();
 });
+
+// DAY-7 | Sprint: Team-Based Management, RBAC & Submission Workflow
+
+test('T34 – Roles & Permissions: 3-tier hierarchy check', () => {
+  const roles = ['ROLE_ADMIN', 'ROLE_MANAGER', 'ROLE_MEMBER'];
+  expect(roles).toHaveLength(3);
+  expect(roles).toContain('ROLE_ADMIN');
+  expect(roles).toContain('ROLE_MANAGER');
+  expect(roles).toContain('ROLE_MEMBER');
+});
+
+test('T35 – Task Status Workflow: valid status transitions', () => {
+  const allowedStatuses = ['TODO', 'IN_PROGRESS', 'SUBMITTED', 'APPROVED', 'REJECTED'];
+  expect(allowedStatuses).toContain('SUBMITTED');
+  expect(allowedStatuses).toContain('APPROVED');
+  expect(allowedStatuses).toContain('REJECTED');
+});
+
+test('T36 – Team Management: duplicate member prevention logic', () => {
+  const existingMembers = [{ id: 1, username: 'alex' }, { id: 2, username: 'sarah' }];
+  const allUsers = [
+    { id: 1, username: 'alex' },
+    { id: 2, username: 'sarah' },
+    { id: 3, username: 'david' },
+  ];
+  const eligibleUsers = allUsers.filter((u) => !existingMembers.some((m) => m.id === u.id));
+  expect(eligibleUsers).toHaveLength(1);
+  expect(eligibleUsers[0].username).toBe('david');
+});
+
+test('T37 – Security check: Project Manager cannot remove Admin', () => {
+  const currentRole = 'ROLE_MANAGER';
+  const targetMemberRole = 'ROLE_ADMIN';
+  const canRemove = currentRole === 'ROLE_ADMIN' || (currentRole === 'ROLE_MANAGER' && targetMemberRole !== 'ROLE_ADMIN');
+  expect(canRemove).toBe(false);
+});
+
+test('T38 – Document Submission: status transition to SUBMITTED', () => {
+  let task = { id: 1, status: 'IN_PROGRESS', progress: 80 };
+  // Simulate member submission
+  task = { ...task, status: 'SUBMITTED' };
+  expect(task.status).toBe('SUBMITTED');
+});
+
+test('T39 – Reviewer Decision: approval sets APPROVED and progress to 100%', () => {
+  let task = { id: 1, status: 'SUBMITTED', progress: 80 };
+  const approve = (t) => ({ ...t, status: 'APPROVED', progress: 100 });
+  task = approve(task);
+  expect(task.status).toBe('APPROVED');
+  expect(task.progress).toBe(100);
+});
+

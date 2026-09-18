@@ -23,7 +23,7 @@ public class CommentController {
     }
 
     @GetMapping("/task/{taskId}")
-    public ResponseEntity<List<Comment>> getByTask(@PathVariable Long taskId) {
+    public ResponseEntity<List<Comment>> getByTask(@PathVariable("taskId") Long taskId) {
         return ResponseEntity.ok(commentRepository.findByTaskId(taskId));
     }
 

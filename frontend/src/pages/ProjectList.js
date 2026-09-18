@@ -31,7 +31,7 @@ function Modal({ title, onClose, children }) {
   );
 }
 
-const EMPTY_PROJECT = { name: '', description: '', startDate: '', endDate: '', team: '' };
+const EMPTY_PROJECT = { name: '', description: '', startDate: '', endDate: '', team: '', status: 'ACTIVE' };
 const EMPTY_SPRINT = { name: '', startDate: '', endDate: '' };
 
 function ProjectList() {
@@ -90,6 +90,7 @@ function ProjectList() {
       startDate: p.startDate || '',
       endDate: p.endDate || '',
       team: p.team?.id || '',
+      status: p.status || 'ACTIVE',
     });
     setShowForm(true);
   };
@@ -102,6 +103,7 @@ function ProjectList() {
       startDate: form.startDate || null,
       endDate: form.endDate || null,
       team: form.team ? { id: Number(form.team) } : null,
+      status: form.status || 'ACTIVE',
     };
     try {
       if (editProject) {
@@ -326,7 +328,11 @@ function ProjectList() {
                       {p.team.name}
                     </span>
                   )}
+                  <span className="badge badge-inprogress" style={{ fontSize: '0.72rem', marginTop: 6, marginLeft: 6 }}>
+                    {p.status || 'ACTIVE'}
+                  </span>
                 </div>
+
 
                 {canManage && (
                   <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
@@ -448,22 +454,39 @@ function ProjectList() {
                 </div>
               </div>
 
-              <div className="form-group">
-                <label className="form-label">Assign Team</label>
-                <select
-                  className="form-control"
-                  value={form.team}
-                  onChange={(e) => setForm((f) => ({ ...f, team: e.target.value }))}
-                >
-                  <option value="">No Team Assigned</option>
-                  {teams.map((t) => (
-                    <option key={t.id} value={t.id}>
-                      {t.name}
-                    </option>
-                  ))}
-                </select>
+              <div className="form-row">
+                <div className="form-group">
+                  <label className="form-label">Assign Team</label>
+                  <select
+                    className="form-control"
+                    value={form.team}
+                    onChange={(e) => setForm((f) => ({ ...f, team: e.target.value }))}
+                  >
+                    <option value="">No Team Assigned</option>
+                    {teams.map((t) => (
+                      <option key={t.id} value={t.id}>
+                        {t.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Project Status</label>
+                  <select
+                    className="form-control"
+                    value={form.status || 'ACTIVE'}
+                    onChange={(e) => setForm((f) => ({ ...f, status: e.target.value }))}
+                  >
+                    <option value="PLANNED">Planned</option>
+                    <option value="ACTIVE">Active</option>
+                    <option value="COMPLETED">Completed</option>
+                    <option value="ON_HOLD">On Hold</option>
+                  </select>
+                </div>
               </div>
             </div>
+
 
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" onClick={() => setShowForm(false)}>

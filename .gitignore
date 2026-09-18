@@ -22,6 +22,8 @@ bin/
 data/
 */data/
 *.mv.db
+uploads/
+*/uploads/
 
 # IDE & Editor files
 .idea/

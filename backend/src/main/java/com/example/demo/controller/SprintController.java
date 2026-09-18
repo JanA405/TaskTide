@@ -24,7 +24,7 @@ public class SprintController {
     }
 
     @GetMapping("/project/{projectId}")
-    public ResponseEntity<List<Sprint>> getByProject(@PathVariable Long projectId) {
+    public ResponseEntity<List<Sprint>> getByProject(@PathVariable("projectId") Long projectId) {
         return ResponseEntity.ok(sprintService.getSprintsByProject(projectId));
     }
 
@@ -36,13 +36,13 @@ public class SprintController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<Sprint> update(@PathVariable Long id, @RequestBody Sprint sprint) {
+    public ResponseEntity<Sprint> update(@PathVariable("id") Long id, @RequestBody Sprint sprint) {
         return ResponseEntity.ok(sprintService.updateSprint(id, sprint));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         sprintService.deleteSprint(id);
         return ResponseEntity.noContent().build();
     }

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api';
-import authHero from '../assets/auth_hero.jpg';
+import projectHero from '../assets/project_planning.jpg';
 
 function Register() {
   const navigate = useNavigate();
@@ -21,15 +21,19 @@ function Register() {
     if (!form.fullName.trim()) e.fullName = 'Full name is required';
     if (!form.username.trim()) e.username = 'Username is required';
     if (!form.email.trim()) e.email = 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Invalid email';
+    else if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Invalid email address';
     if (!form.password) e.password = 'Password is required';
-    else if (form.password.length < 6) e.password = 'Min 6 characters';
+    else if (form.password.length < 6) e.password = 'Minimum 6 characters';
     return e;
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const setRole = (role) => {
+    setForm((prev) => ({ ...prev, role }));
   };
 
   const handleSubmit = async (e) => {
@@ -68,27 +72,28 @@ function Register() {
 
         <div style={{ textAlign: 'center', margin: 'auto 0' }}>
           <img
-            src={authHero}
-            alt="TaskTide Workspace Illustration"
+            src={projectHero}
+            alt="Project Planning & Sprints"
             className="auth-showcase-artwork"
+            style={{ borderRadius: 'var(--radius-lg)', boxShadow: '0 12px 28px rgba(0,0,0,0.18)' }}
           />
           <h2 style={{ fontSize: '1.65rem', fontWeight: 800, marginTop: 24, letterSpacing: '-0.02em' }}>
-            Start Building with Flow
+            Transform Ideas into Shipped Features
           </h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: 440, margin: '8px auto 0' }}>
-            Join your teammates and coordinate product backlogs, sprint cycles, and deliver on time.
+          <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: 460, margin: '8px auto 0' }}>
+            Coordinate roadmap milestones, automate task delegation across squads, and track delivery with enterprise visibility.
           </p>
         </div>
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
           <span className="topbar-badge" style={{ background: 'rgba(2, 132, 199, 0.08)', color: '#0284c7', borderColor: '#bae6fd', fontWeight: 600 }}>
-            ✓ Instant Setup
+            🚀 Instant Workspace
           </span>
           <span className="topbar-badge" style={{ background: 'rgba(79, 70, 229, 0.08)', color: '#4f46e5', borderColor: '#c7d2fe', fontWeight: 600 }}>
-            ✓ Automated Analytics
+            📊 Progress Tracking
           </span>
           <span className="topbar-badge" style={{ background: 'rgba(22, 163, 74, 0.08)', color: '#16a34a', borderColor: '#bbf7d0', fontWeight: 600 }}>
-            ✓ Unlimited Workspaces
+            🛡️ Enterprise Auditing
           </span>
         </div>
       </div>
@@ -98,7 +103,7 @@ function Register() {
         <div className="auth-box">
           <div className="auth-box-header">
             <h1>Create Account</h1>
-            <p>Get started with your TaskTide workspace</p>
+            <p>Select your team role and enter your details to get started</p>
           </div>
 
           {error && (
@@ -113,15 +118,87 @@ function Register() {
           )}
 
           <form onSubmit={handleSubmit}>
+            {/* Visual Role Selector Cards */}
+            <div className="form-group">
+              <label className="form-label">Select Your Role</label>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8, marginTop: 4 }}>
+                <div
+                  onClick={() => setRole('ROLE_MEMBER')}
+                  style={{
+                    border: form.role === 'ROLE_MEMBER' ? '2px solid #16a34a' : '1px solid #e2e8f0',
+                    background: form.role === 'ROLE_MEMBER' ? '#f0fdf4' : '#ffffff',
+                    padding: '10px 8px',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <div style={{ fontSize: '1.2rem', marginBottom: 2 }}>⚡</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: form.role === 'ROLE_MEMBER' ? '#16a34a' : 'var(--text)' }}>
+                    Member
+                  </div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Build & Deliver</div>
+                </div>
+
+                <div
+                  onClick={() => setRole('ROLE_MANAGER')}
+                  style={{
+                    border: form.role === 'ROLE_MANAGER' ? '2px solid #4f46e5' : '1px solid #e2e8f0',
+                    background: form.role === 'ROLE_MANAGER' ? '#eef2ff' : '#ffffff',
+                    padding: '10px 8px',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <div style={{ fontSize: '1.2rem', marginBottom: 2 }}>💼</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: form.role === 'ROLE_MANAGER' ? '#4f46e5' : 'var(--text)' }}>
+                    Manager
+                  </div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Lead & Review</div>
+                </div>
+
+                <div
+                  onClick={() => setRole('ROLE_ADMIN')}
+                  style={{
+                    border: form.role === 'ROLE_ADMIN' ? '2px solid #9333ea' : '1px solid #e2e8f0',
+                    background: form.role === 'ROLE_ADMIN' ? '#faf5ff' : '#ffffff',
+                    padding: '10px 8px',
+                    borderRadius: 'var(--radius-sm)',
+                    cursor: 'pointer',
+                    textAlign: 'center',
+                    transition: 'all 0.2s',
+                  }}
+                >
+                  <div style={{ fontSize: '1.2rem', marginBottom: 2 }}>👑</div>
+                  <div style={{ fontSize: '0.8rem', fontWeight: 700, color: form.role === 'ROLE_ADMIN' ? '#9333ea' : 'var(--text)' }}>
+                    Admin
+                  </div>
+                  <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>Full System</div>
+                </div>
+              </div>
+            </div>
+
             <div className="form-group">
               <label className="form-label">Full Name</label>
-              <input
-                name="fullName"
-                className="form-control"
-                placeholder="e.g. Alex Morgan"
-                value={form.fullName}
-                onChange={handleChange}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  name="fullName"
+                  className="form-control"
+                  placeholder="e.g. Alex Morgan"
+                  value={form.fullName}
+                  onChange={handleChange}
+                  style={{ paddingLeft: 40 }}
+                />
+                <svg
+                  style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)', pointerEvents: 'none' }}
+                  width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </div>
               {errors.fullName && (
                 <small style={{ color: 'var(--danger)', fontSize: '0.78rem', marginTop: 4, display: 'block' }}>
                   {errors.fullName}
@@ -132,13 +209,22 @@ function Register() {
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label">Username</label>
-                <input
-                  name="username"
-                  className="form-control"
-                  placeholder="e.g. alexm"
-                  value={form.username}
-                  onChange={handleChange}
-                />
+                <div style={{ position: 'relative' }}>
+                  <input
+                    name="username"
+                    className="form-control"
+                    placeholder="e.g. alexm"
+                    value={form.username}
+                    onChange={handleChange}
+                    style={{ paddingLeft: 40 }}
+                  />
+                  <svg
+                    style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)', pointerEvents: 'none' }}
+                    width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                  </svg>
+                </div>
                 {errors.username && (
                   <small style={{ color: 'var(--danger)', fontSize: '0.78rem', marginTop: 4, display: 'block' }}>
                     {errors.username}
@@ -147,42 +233,51 @@ function Register() {
               </div>
 
               <div className="form-group">
-                <label className="form-label">Role</label>
-                <select name="role" className="form-control" value={form.role} onChange={handleChange}>
-                  <option value="ROLE_MEMBER">Team Member</option>
-                  <option value="ROLE_MANAGER">Project Manager</option>
-                  <option value="ROLE_ADMIN">Administrator</option>
-                </select>
+                <label className="form-label">Work Email</label>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="alex@company.com"
+                    value={form.email}
+                    onChange={handleChange}
+                    style={{ paddingLeft: 40 }}
+                  />
+                  <svg
+                    style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)', pointerEvents: 'none' }}
+                    width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                    <polyline points="22,6 12,13 2,6"/>
+                  </svg>
+                </div>
+                {errors.email && (
+                  <small style={{ color: 'var(--danger)', fontSize: '0.78rem', marginTop: 4, display: 'block' }}>
+                    {errors.email}
+                  </small>
+                )}
               </div>
             </div>
 
             <div className="form-group">
-              <label className="form-label">Work Email</label>
-              <input
-                type="email"
-                name="email"
-                className="form-control"
-                placeholder="alex@company.com"
-                value={form.email}
-                onChange={handleChange}
-              />
-              {errors.email && (
-                <small style={{ color: 'var(--danger)', fontSize: '0.78rem', marginTop: 4, display: 'block' }}>
-                  {errors.email}
-                </small>
-              )}
-            </div>
-
-            <div className="form-group">
               <label className="form-label">Password</label>
-              <input
-                type="password"
-                name="password"
-                className="form-control"
-                placeholder="At least 6 characters"
-                value={form.password}
-                onChange={handleChange}
-              />
+              <div style={{ position: 'relative' }}>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control"
+                  placeholder="At least 6 characters"
+                  value={form.password}
+                  onChange={handleChange}
+                  style={{ paddingLeft: 40 }}
+                />
+                <svg
+                  style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-dim)', pointerEvents: 'none' }}
+                  width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
               {errors.password && (
                 <small style={{ color: 'var(--danger)', fontSize: '0.78rem', marginTop: 4, display: 'block' }}>
                   {errors.password}

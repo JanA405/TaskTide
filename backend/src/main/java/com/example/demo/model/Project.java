@@ -18,11 +18,24 @@ public class Project {
     private LocalDate startDate;
     private LocalDate endDate;
 
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status = ProjectStatus.ACTIVE;
+
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
 
     public Project() {}
+
+    public Project(Long id, String name, String description, LocalDate startDate, LocalDate endDate, ProjectStatus status, Team team) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status != null ? status : ProjectStatus.ACTIVE;
+        this.team = team;
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -34,6 +47,8 @@ public class Project {
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
     public LocalDate getEndDate() { return endDate; }
     public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
+    public ProjectStatus getStatus() { return status; }
+    public void setStatus(ProjectStatus status) { this.status = status; }
     public Team getTeam() { return team; }
     public void setTeam(Team team) { this.team = team; }
 }

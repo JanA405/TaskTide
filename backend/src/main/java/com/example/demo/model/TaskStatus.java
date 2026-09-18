@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
 public enum TaskStatus {
-    TODO, IN_PROGRESS, DONE
+    TODO, IN_PROGRESS, SUBMITTED, APPROVED, REJECTED, DONE
 }
+

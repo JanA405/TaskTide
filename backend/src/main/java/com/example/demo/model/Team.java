@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "teams")
@@ -14,6 +17,20 @@ public class Team {
     private String name;
 
     private String description;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "team_members",
+        joinColumns = @JoinColumn(name = "team_id"),
+        inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    @JsonIgnoreProperties({"password", "teams"})
+    private Set<User> members = new HashSet<>();
+
+    @ManyToOne
+    @JoinColumn(name = "created_by")
+    @JsonIgnoreProperties({"password", "teams"})
+    private User createdBy;
 
     public Team() {
     }
@@ -46,5 +63,29 @@ public class Team {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<User> getMembers() {
+        return members;
+    }
+
+    public void setMembers(Set<User> members) {
+        this.members = members;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public void addMember(User user) {
+        this.members.add(user);
+    }
+
+    public void removeMember(User user) {
+        this.members.remove(user);
     }
 }
